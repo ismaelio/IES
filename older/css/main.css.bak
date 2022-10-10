@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "Bree Serif";
+    src: url('../fonts/BreeSerif-Regular.ttf');
+}
+
+@font-face {
+	font-family: "Josefin Sans";
+    src: url('../fonts/JosefinSans-VariableFont_wght.ttf');
+}
+
+h1 {
+  font-family: "Bree Serif", Times;
+  font-size: 72px;
+  color: red;
+  text-align: center;
+  margin-bottom:0;
+  margin-top: 0;
+}
+
+h2 {
+  font-family: "Josefin Sans", Times;
+  font-size: 18px;
+  color: black;
+  text-align: center;
+  margin-top:0;
+}
+
+a {
+	text-decoration: none;
+	font-family: "Josefin Sans";
+}
+
+input {
+	font-family: "Josefin Sans";
+}
+
+input[type=text], input[type=password], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  font-size:16px;
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+  width: 100%;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+footer {
+	text-align: center;
+    clear: both;
+    position: absolute;
+    height: 10px;
+	margin-left: 30%;
+	width:40%;
+	margin-right: 30%;
+    bottom: 20px;
+	font-family: "Bree Serif";
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  text-align:center;
+  text-align:center;
+  width: 400px;
+  max-width: 400px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.col-15 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+
+.col-85 {
+  float: left;
+  width: 85%;
+  margin-top: 6px;
+}
+
+.col-90 {
+  float: center;
+  width: 90%;
+  margin-top: 6px;
+}
+
+.col-100 {
+  float: center;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-15, .col-25, .col-75, .col-85, .col-90, .col-100 input[type=submit] {
+    width: 100%;
+	max-width:100%;
+    margin-top: 0;
+  }
+  
+  .container {
+	max-width: 80%;
+  }
+  
+  h1 {
+	font-size: 72px;
+  }
+  
+  footer {
+	bottom: default;
+  }
+}
