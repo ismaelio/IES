@@ -19,8 +19,8 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
+// app.use(express.static('views'));
 app.use(express.static('public'));
-app.use(express.static('views'));
 
 // var userRoute = require(__dirname + '/public/html/aluno/');
 // app.use('/notas', userRoute);
