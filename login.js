@@ -3,27 +3,13 @@ const session = require('express-session');
 const path = require('path');
 const ejs = require('ejs');
 
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root', //
-  password: 'admin', //
-  database: 'nodelogin',
-})
-connection.connect((err) => {
-  if (err) {
-    console.log(err)
-    return
-  }
-  console.log('Banco de Dados conectado.')
-})
-module.exports = connection
-
 var router = express.Router();
 var bodyParser = require('body-parser');
 var flash = require('express-flash');
 
 const app = express();
+
+var connection = require('./database')
 
 app.use(session({
 	secret: 'secret',
@@ -34,20 +20,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.static('public'));
-app.use(express.static('public/html'));
+app.use(express.static('views'));
 
 // var userRoute = require(__dirname + '/public/html/aluno/');
 // app.use('/notas', userRoute);
 
 app.set('view engine', 'ejs')
 
-// http://localhost:3000/
 app.get('/', function(request, response) {
 	// Render login template
-	response.sendFile(path.join(__dirname + '/public/index.html'));
+	response.render(path.join(__dirname + '/views/index'), {errormessage: ""});
 });
 
-// http://localhost:3000/auth
 app.post('/auth', function(request, response) {
 	// Capture the input fields
 	let usuario = request.body.usuario;
@@ -66,7 +50,8 @@ app.post('/auth', function(request, response) {
 				// Redirect to home page
 				response.redirect('/home');
 			} else {
-				response.send('Incorrect User and/or Password!');
+				// response.send('Incorrect User and/or Password!');
+				response.render(path.join(__dirname + '/views/index'), {errormessage: "Usuário e/ou senha incorretos!"});
 			}			
 			response.end();
 		});
@@ -76,26 +61,19 @@ app.post('/auth', function(request, response) {
 	}
 });
 
-// http://localhost:3000/home
+app.get('/logout', function(request, response) {
+	request.session.loggedin = false;
+	request.session.usuario = null;
+	response.render(path.join(__dirname + '/views/index'), {errormessage: "Logout efetuado com sucesso!"});
+});
+
 app.get('/home', function(request, response) {
 	// If the user is loggedin
 	if (request.session.loggedin) {
-		// Output username
-		// response.send('Welcome back, ' + request.session.usuario + '!');
-		// response.redirect(__dirname + '/public/html/escolha.html');
-		// const filePath = path.join(__dirname + '/public/html/escolha.html');
-		// response.sendFile(filePath, function(err) {
-        // if (err) {
-            // return response.status(err.status).end();
-        // } else {
-            // return response.status(200).end();
-        // }
-		// }); 
-		response.sendFile(__dirname + '/public/html/escolha.html');
+		response.render(__dirname + '/views/escolha');
 		} else {
 		// Not logged in
-		response.send('Please login to view this page!');
-		// response.render('view', { errormessage: 'your message' });
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
 	}
 	// response.end();
 });
@@ -107,23 +85,29 @@ app.get('/notas', function(request, response) {
 	if (request.session.loggedin) {
 	// Render login template
 	connection.query('SELECT * FROM notas ORDER BY disciplina', function (err, rows) {
-    // if (err) {
-      // request.flash('error', err);
-		// response.send(__dirname + '/public/html/aluno/notas', { data: '' });
-    // } else {
-		// response.send('/html/aluno/notas', { data: rows });
-    // }
-	
-	response.render(__dirname + '/public/html/aluno/notas.ejs', {
+    if (err) {
+    request.flash('error', err);
+	response.render(__dirname + '/views/aluno/notas.ejs', {
         // EJS variable and server-side variable
+        data: ""
+    });
+    } else {
+		response.render(__dirname + '/views/aluno/notas.ejs', {
         data: rows
     });
-	
+    }
 	});
 	} else {
 		// Not logged in
-		response.send('Please login to view this page!');
-		// response.render('view', { errormessage: 'your message' });
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
+	}
+});
+
+app.get('/aluno', function(request, response) {
+	if (request.session.loggedin) {
+		response.render(__dirname + '/views/aluno/main');
+	} else {
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
 	}
 });
 

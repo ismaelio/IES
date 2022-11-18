@@ -64,6 +64,11 @@ footer {
     font-family: "Bree Serif";
 }
 
+.errormessage {
+	color: red;
+	font-size:18px;
+}
+
 @media screen and (max-width: 600px) {
     .box {
         max-width: 80%;

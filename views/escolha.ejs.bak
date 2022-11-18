@@ -14,9 +14,9 @@
 
     <div class="container-fluid">
         <div class="position-absolute top-50 start-50 translate-middle">
-            <a class="btn btn-outline-danger p-5" href="aluno/main.html">Aluno</a>
-            <a class="btn btn-outline-danger p-5" href="professor/main.html">Professor</a>
-            <a class="btn btn-outline-danger p-5" href="administrador/main.html">Administrador</a>
+            <a class="btn btn-outline-danger p-5" href="aluno/main">Aluno</a>
+            <a class="btn btn-outline-danger p-5" href="professor/main">Professor</a>
+            <a class="btn btn-outline-danger p-5" href="administrador/main">Administrador</a>
         </div>
     </div>
 
