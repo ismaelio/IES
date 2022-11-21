@@ -40,12 +40,15 @@
                             </div>
                             <div class="menu">
                                 <ul>
-                                    <li class="p-1 ps-3" onclick="location.href='/professor';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='/professor';"
+                                        style="cursor:pointer;">
                                         Início</li>
-                                    <li class="p-1 ps-3" onclick="location.href='/frequencia';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='/frequencia';"
+                                        style="cursor:pointer;">
                                         Frequência
                                     </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/professor_notas';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='../../notas/direction_notas.html';"
+                                        style="cursor:pointer;">
                                         Notas
                                     </li>
                                 </ul>
@@ -67,16 +70,19 @@
                                         </thead>
                                         <tbody class="table-group-divider text-center">
                                             <tr>
-                                                <td>PT200</td>
-                                                <td>Português</td>
+                                                <td>MT100</td>
+                                                <td>Matemática</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary" onclick="location.href='../pt200/pt200_02_08_22/frequencia_pt200.html';">02/08/2022</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="location.href='../mt100/mt100_01_08_22/frequencia_mt100.html';">01/08/2022</button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>PT200</td>
-                                                <td>Português</td>
-                                                <td><button type="button" class="btn btn-primary" onclick="location.href='../pt200/pt200_05_08_22/frequencia_pt200.html';">05/08/2022</button>
+                                                <td>MT100</td>
+                                                <td>Matemática</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="location.href='../mt100/mt100_04_08_22/frequencia_mt100.html';">04/08/2022</button>
                                                 </td>
                                             </tr>
                                         </tbody>

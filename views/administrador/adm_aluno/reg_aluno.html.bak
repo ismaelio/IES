@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>Cadastro Turma</title>
+    <title>Cadastro Aluno</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 </head>
 
 <head>
-    <title>Cadastro Turma</title>
+    <title>Cadastro Aluno</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,10 +51,10 @@
                             </div>
                             <div class="menu">
                                 <ul>
-                                    <li class="p-1 ps-3" onclick="location.href='/administrador';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='../main.html';" style="cursor:pointer;">
                                         Início
                                     </li>
-                                    <li class="p-1 ps-3" onclick="location.href='../adm_aluno/reg_aluno.html';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='reg_aluno.html';" style="cursor:pointer;">
                                         Alunos
                                     </li>
                                     <li class="p-1 ps-3" onclick="location.href='../adm_professor/reg_professor.html';" style="cursor:pointer;">
@@ -66,7 +66,7 @@
                                     <li class="p-1 ps-3" onclick="location.href='../adm_horario/reg_horario.html';" style="cursor:pointer;">
                                         Horário
                                     </li>
-                                    <li class="p-1 ps-3" onclick="location.href='reg_turma.html';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='../adm_turma/reg_turma.html';" style="cursor:pointer;">
                                         Turma
                                     </li>
                                 </ul>
@@ -74,7 +74,7 @@
                         </div>
                         <button class="openbtn btn btn-dark position-absolute" onclick="openNav()">&#9776;</button>
                         <div class="row">
-                            <h1 class="title2 fw-bold text-center">Cadastro Turma</h1>
+                            <h1 class="title2 fw-bold text-center">Cadastro Aluno</h1>
                             <hr class="border border-dark border-1">
                             <div class="row">
                                 <div class="container text-center">
@@ -86,17 +86,25 @@
                                     <div class="row materias">
                                         <div class="col-lg-6 col-12">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Código</label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="1234">
+                                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                                         </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label">Nome</label>
                                                 <input class="form-control" type="text" placeholder="Nome Completo" aria-label="default input example">
                                         </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="exampleFormControlInput1" class="form-label">RA</label>
+                                            <input class="form-control" type="text" placeholder="1234" aria-label="default input example">
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="exampleFormControlInput1" class="form-label">CPF</label>
+                                            <input class="form-control" type="text" placeholder="123.456.789.10" aria-label="default input example">
+                                        </div>
                                         <div class="container text-center">
-                                            <br><label for="exampleFormControlInput1" class="form-label">Sala</label><br>
-                                            <input class="col-lg-6 col-12" type="number" placeholder="12" aria-label="default input example">
+                                            <br><label for="exampleFormControlInput1" class="form-label">Data de Nascimento</label><br>
+                                            <input class="col-lg-6 col-12" type="text" placeholder="day/month/year" aria-label="default input example">
                                         </div>
                                         <div class="container text-center">
                                             <br><button type="button" class="btn btn-outline-success">Salvar</button>

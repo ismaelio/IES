@@ -47,14 +47,14 @@
                                     Período integral<br />
                                     RA: 6666
                                 </h6>
-                                <a href="../../../index.html" class="btn d-grid btn-danger mb-3">Sair</a>
+                                <a href="/logout" class="btn d-grid btn-danger mb-3">Sair</a>
                             </div>
                             <div class="menu">
                                 <ul>
-                                    <li class="p-1 ps-3" onclick="location.href='../main.html';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='/administrador';" style="cursor:pointer;">
                                         Início
                                     </li>
-                                    <li class="p-1 ps-3" onclick="location.href='reg_aluno.html';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='/administrador_aluno';" style="cursor:pointer;">
                                         Alunos
                                     </li>
                                     <li class="p-1 ps-3" onclick="location.href='../adm_professor/reg_professor.html';" style="cursor:pointer;">
@@ -74,6 +74,11 @@
                         </div>
                         <button class="openbtn btn btn-dark position-absolute" onclick="openNav()">&#9776;</button>
                         <div class="row">
+							
+							<form action="/administrador_aluno_cadastrado" method="post">
+							<% if (message !== "") { %>
+								<h1 style="font-size:42px; color:blue;" id='status' class='title2'><%= message %></h1>
+						    <% } %>
                             <h1 class="title2 fw-bold text-center">Cadastro Aluno</h1>
                             <hr class="border border-dark border-1">
                             <div class="row">
@@ -84,34 +89,37 @@
                                         </div>
                                     </div>
                                     <div class="row materias">
-                                        <div class="col-lg-6 col-12">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+										<div class="col-lg-6 col-12">
+											<div class="mb-3">
+												<label for="exampleFormControlInput1" class="form-label">RA</label>
+												<input class="form-control" id="ra" name="ra" type="text" placeholder="1234" aria-label="default input example">
+											</div>
                                         </div>
-                                        </div>
-                                        <div class="col-lg-6 col-12">
+										<div class="col-lg-6 col-12">
                                             <label class="form-label">Nome</label>
-                                                <input class="form-control" type="text" placeholder="Nome Completo" aria-label="default input example">
+                                                <input class="form-control" id="nome" name="nome" type="text" placeholder="Nome Completo" aria-label="default input example">
                                         </div>
-                                        <div class="col-lg-6 col-12">
-                                            <label for="exampleFormControlInput1" class="form-label">RA</label>
-                                            <input class="form-control" type="text" placeholder="1234" aria-label="default input example">
-                                        </div>
-                                        <div class="col-lg-6 col-12">
+										<div class="col-lg-6 col-12">
                                             <label for="exampleFormControlInput1" class="form-label">CPF</label>
-                                            <input class="form-control" type="text" placeholder="123.456.789.10" aria-label="default input example">
+                                            <input class="form-control" id="cpf" name="cpf" type="text" placeholder="123.456.789-10" aria-label="default input example">
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <!-- <div class="mb-3"> -->
+                                                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                                                <input type="email" id="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com">
+											<!-- </div> -->
                                         </div>
                                         <div class="container text-center">
                                             <br><label for="exampleFormControlInput1" class="form-label">Data de Nascimento</label><br>
-                                            <input class="col-lg-6 col-12" type="text" placeholder="day/month/year" aria-label="default input example">
+                                            <input class="form-control col-lg-6 col-12" id="nasc" name="nasc" type="date" aria-label="default input example">
                                         </div>
                                         <div class="container text-center">
-                                            <br><button type="button" class="btn btn-outline-success">Salvar</button>
+										<br><input type="submit" class="btn btn-outline-success" value="Salvar"></input>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+							</form>
                         </div>
                     </div>
                 </div>

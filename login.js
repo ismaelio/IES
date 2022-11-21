@@ -19,7 +19,7 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
-// app.use(express.static('views'));
+app.use(express.static('.'));
 app.use(express.static('public'));
 
 // var userRoute = require(__dirname + '/public/html/aluno/');
@@ -109,6 +109,64 @@ app.get('/aluno', function(request, response) {
 	} else {
 		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
 	}
+});
+
+// Professor
+app.get('/professor', function(request, response) {
+	if (request.session.loggedin) {
+		response.render(__dirname + '/views/professor/main');
+	} else {
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
+	}
+});
+
+app.get('/frequencia', function(request, response) {
+	if (request.session.loggedin) {
+		response.render(__dirname + '/views/professor/frequencia/direction_frequencia');
+	} else {
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
+	}
+});
+
+app.get('/professor_notas', function(request, response) {
+	if (request.session.loggedin) {
+		response.render(__dirname + '/views/professor/notas/direction_notas');
+	} else {
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
+	}
+});
+
+// Administrador
+app.get('/administrador', function(request, response) {
+	if (request.session.loggedin) {
+		response.render(__dirname + '/views/administrador/main');
+	} else {
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
+	}
+});
+
+app.get('/administrador_aluno', function(request, response) {
+	if (request.session.loggedin) {
+		response.render(__dirname + '/views/administrador/adm_aluno/reg_aluno', {message: ""});
+	} else {
+		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
+	}
+});
+
+app.post('/administrador_aluno_cadastrado', function(request, response) {
+	// Capture the input fields
+	let ra = request.body.ra;
+	let nome = request.body.nome;
+	let cpf = request.body.cpf;
+	let email = request.body.email;
+	let nasc = request.body.nasc;
+	
+		connection.query('INSERT INTO aluno (ra, nome, cpf, email, nasc) values ("?","?","?","?","?")', [ra, nome, cpf, email, nasc], function(error, results, fields) {
+			// If there is an issue with the query, output the error
+			if (error) throw error;
+				response.render('administrador/adm_aluno/reg_aluno', {message: "Aluno cadastrado com sucesso!"});
+		});
+		// response.end();
 });
 
 module.exports = router

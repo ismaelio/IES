@@ -45,7 +45,7 @@
                                     <li class="p-1 ps-3" onclick="location.href='/frequencia';" style="cursor:pointer;">
                                         Frequência
                                     </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/professor_notas';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='../../notas/direction_notas.html';" style="cursor:pointer;">
                                         Notas
                                     </li>
                                 </ul>

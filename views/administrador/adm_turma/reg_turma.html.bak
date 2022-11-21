@@ -47,11 +47,11 @@
                                     Período integral<br />
                                     RA: 6666
                                 </h6>
-                                <a href="/logout" class="btn d-grid btn-danger mb-3">Sair</a>
+                                <a href="../../../index.html" class="btn d-grid btn-danger mb-3">Sair</a>
                             </div>
                             <div class="menu">
                                 <ul>
-                                    <li class="p-1 ps-3" onclick="location.href='/administrador';" style="cursor:pointer;">
+                                    <li class="p-1 ps-3" onclick="location.href='../main.html';" style="cursor:pointer;">
                                         Início
                                     </li>
                                     <li class="p-1 ps-3" onclick="location.href='../adm_aluno/reg_aluno.html';" style="cursor:pointer;">

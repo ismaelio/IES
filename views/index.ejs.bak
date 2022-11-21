@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/index.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
@@ -20,7 +20,7 @@
         <!-- <form action="html/escolha.html"> -->
 		<form action="/auth" method="post">
 		<% if (errormessage !== "") { %>
-		   <div id='status' class='errormessage'><%= errormessage %></div>
+		   <h1 style="font-size:42px; color:blue;" id='status' class='errormessage'><%= errormessage %></h1>
 		  <% } %>
           <div class="row justify-content-center">
             <div class="col-10">
