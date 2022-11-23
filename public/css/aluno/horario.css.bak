@@ -17,15 +17,16 @@
     overflow: auto;
 }
 
-a {
-	text-decoration: none;
-}
-
 h1 {
     font-family: "Bree Serif";
 }
 
 h1.title {
+    color: red;
+    font-size: 60px;
+}
+
+h1.title2 {
     color: red;
     font-size: 60px;
 }
@@ -66,10 +67,6 @@ h1.title {
     background-color: #0099cc;
 }
 
-.content{
-    min-height: 400px;
-}
-
 footer {
     font-family: "Bree Serif";
 }
@@ -90,5 +87,17 @@ footer {
     .floatright {
         font-size: 24px;
         text-align: left;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    h1.title2 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h1.title2 {
+        font-size: 32px;
     }
 }

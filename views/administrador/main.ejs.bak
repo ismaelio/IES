@@ -1,74 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <title>Bem-vindo!</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/administrador/main.css">
-    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico" />
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="header p-3">
-            <header>
-                <h1 class="title fw-bold floatleft">PGE</h1>
-                <h1 class="fw-bold center mt-md-2">Fatec Zona Sul</h1>
-                <h1 class="fw-bold floatright">MEC</h1>
-            </header>
-        </div>
-        <main>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-2 col-12">
-                        <div class="row">
-                            <div class="col border border-3 border-dark">
-                                <img class="img-fluid mx-auto d-block m-3" src="../../images/user.png" />
-                                <h6 class="fw-bold">
-                                    Neymar JR<br />
-                                    Diretor<br />
-                                    Período integral<br />
-                                    RA: 6666
-                                </h6>
-                                <a href="/logout" class="btn d-grid btn-danger mb-3">Sair</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col border border-3 border-dark menu py-3">
-                                <ul>
-                                    <li class="p-1 ps-3" onclick="location.href='/administrador';" style="cursor:pointer;">
-                                        Início
-                                    </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/views/administrador/adm_aluno/reg_aluno.html';" style="cursor:pointer;">
-                                        Alunos
-                                    </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/views/administrador/adm_professor/reg_professor.html';" style="cursor:pointer;">
-                                        Professores
-                                    </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/views/administrador/adm_materia/reg_materia.html';" style="cursor:pointer;">
-                                        Matérias
-                                    </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/views/administrador/adm_horario/reg_horario.html';" style="cursor:pointer;">
-                                        Horário
-                                    </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/views/administrador/adm_turma/reg_turma.html';" style="cursor:pointer;">
-                                        Turma
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-10 col-12 border border-3 border-dark p-4 content">
-
-                    </div>
-                </div>
-            </div>
-            <footer class="position-absolute start-50 translate-middle-x">© 2022 PGE</footer>
-        </main>
-    </div>
-</body>
-
+	<head>
+		<title>Bem-vindo!</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../css/bootstrap.css">
+		<link rel="stylesheet" href="../../css/administrador/main.css">
+		<link rel="icon" type="image/x-icon" href="../../images/favicon.ico" />
+	</head>
+	
+	<body>
+		<div class="container-fluid">
+			<div class="header p-3">
+				<header>
+					<h1 class="title fw-bold floatleft">PGE</h1>
+					<h1 class="fw-bold center mt-md-2">Fatec Zona Sul</h1>
+					<h1 class="fw-bold floatright">MEC</h1>
+				</header>
+			</div>
+			<main>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-2 col-12">
+							<div class="row">
+								<div class="col border border-3 border-dark">
+									<img class="img-fluid mx-auto d-block m-3" src="<%=foto%>" />
+									<h6 class="fw-bold">
+										Bem-vindo: <%=usuario%><br>
+										Administrador<br>
+									</h6>
+									<a href="/logout" class="btn d-grid btn-danger mb-3">Sair</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col border border-3 border-dark menu py-3">
+									<ul>
+										<li class="p-1 ps-3" onclick="location.href='/administrador';" style="cursor:pointer;">
+											Início
+										</li>
+										<li class="p-1 ps-3" onclick="location.href='/administrador_aluno';" style="cursor:pointer;">
+											Alunos
+										</li>
+										<li class="p-1 ps-3" onclick="location.href='/administrador_professor';" style="cursor:pointer;">
+											Professores
+										</li>
+										<li class="p-1 ps-3" onclick="location.href='/administrador_disciplina';" style="cursor:pointer;">
+											Disciplinas
+										</li>
+										<li class="p-1 ps-3" onclick="location.href='/administrador_horario';" style="cursor:pointer;">
+											Horário
+										</li>
+										<li class="p-1 ps-3" onclick="location.href='/administrador_turma';" style="cursor:pointer;">
+											Turma
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-10 col-12 border border-3 border-dark p-4 content">
+						</div>
+					</div>
+				</div>
+				<footer class="position-absolute start-50 translate-middle-x">© 2022 PGE</footer>
+			</main>
+		</div>
+	</body>
 </html>
