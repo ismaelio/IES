@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+	
 	<head>
-		<title>Editar dados do aluno</title>
+		<title>Disciplinas</title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
 		<link rel="icon" type="image/x-icon" href="../../../images/favicon.ico" />
 		<script src="../../../js/sidepanel-menu.js"></script>
 	</head>
+	
 	<body>
 		<div class="container-fluid">
 			<div class="header p-3">
@@ -26,55 +28,34 @@
 						<div class="col-12 border border-3 border-dark p-4">
 							<%- include("../../partial/_admin_painel.ejs"); %>
 							<div class="row">
-								<h1 class="title fw-bold text-center">Editar Aluno</h1>
+								<h1 class="title fw-bold text-center">Nova Disciplina</h1>
+								<% if (message !== "") { %>
+								<h1 style="font-size:42px; color:blue; text-align:center;" id='status' class='title2'><%= message %></h1>
+								<% } %>
 								<hr class="border border-dark border-1">
 								<div class="row">
-									<form method="post" action="/administrador_aluno_editado">
+									<form method="post" action="/administrador_disciplina_cadastrado">
 										<div class="row justify-content-center">
 											<div class="col-10 col-md-6">
 												<div class="row">
 													<div class="col-12 col-sm-5">
 														<div class="mb-3">
-															<label class="form-label">RA</label>
-															<input type="text" class="form-control" id="ra" name="ra" readonly
-															value="<%= data[0].ra%>">
+															<label class="form-label">Código</label>
+															<input type="text" class="form-control" id="codigo" name="codigo">
 														</div>
 													</div>
 													<div class="col-12 col-sm-7">
 														<div class="mb-3">
-															<label class="form-label">CPF</label>
-															<input type="text" class="form-control" id="cpf" name="cpf" readonly
-															value="<%= data[0].cpf%>">
-														</div>
-													</div>
-													<div class="col-12">
-														<div class="mb-3">
 															<label class="form-label">Nome</label>
-															<input type="text" class="form-control" id="nome" name="nome"
-															value="<%= data[0].nome%>">
-														</div>
-													</div>
-													<div class="col-12">
-														<div class="mb-3">
-															<label class="form-label">Email</label>
-															<input type="email" class="form-control" id="email" name="email"
-															value="<%= data[0].email%>">
-														</div>
-													</div>
-													<div class="col-12 col-sm-6">
-														<div class="mb-3">
-															<label class="form-label">Data de Nascimento</label>
-															<input type="text" class="form-control" id="nasc" name="nasc"
-															value="<%= data[0].nasc%>">
+															<input type="text" class="form-control" id="nome" name="nome">
 														</div>
 													</div>
 													<div class="col-12 col-sm-12">
 														<div class="mb-3">
-															<label class="form-label">Código da Turma</label>
-															<select class="form-select" id="cod_turma" name="cod_turma">
-																<% if(datac.length){ for(var i = 0; i< datac.length; i++) {%>
-																<option <% if(datac[i].codigo === data[0].cod_turma) {%>selected<%}%>><%= datac[i].codigo%>
-																</option>
+															<label class="form-label">Código do Professor</label>
+															<select class="form-select" id="rp_professor" name="rp_professor">
+																<% if(data.length){ for(var i = 0; i< data.length; i++) {%>
+																<option><%= data[i].rp%></option>
 																<% } }else{ %>
 																<!-- <div class="col-12 col-sm-6 col-lg-3 py-4 px-5">
 																	<h5 class="text-center fw-bold">Nenhum dado encontrado.</h5>
@@ -89,7 +70,7 @@
 														<button type="submit" class="btn btn-success">Salvar</button>
 													</div>
 													<div class="col-12 col-sm-6 d-grid gap-2">
-														<button type="reset" class="btn btn-danger">Resetar</button>
+														<button type="reset" class="btn btn-danger">Limpar</button>
 													</div>
 												</div>
 											</div>
@@ -104,5 +85,4 @@
 			</main>
 		</div>
 	</body>
-	
 </html>
