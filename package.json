@@ -31,8 +31,6 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.20",
-    "react-dev-utils": "^10.0.0",
-    "react-scripts": "^5.0.1"
+    "nodemon": "^2.0.20"
   }
 }
