@@ -26,32 +26,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 border border-3 border-dark p-4">
-                        <div id="mySidepanel" class="sidepanel">
-                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                            <div>
-                                <img class="mx-auto d-block" src="../../../images/user.png">
-                                <h6 class="fw-bold">
-                                    Jose Nier<br />
-                                    Professor<br />
-                                    Período Matutino<br />
-                                    RA: 4321
-                                </h6>
-                                <a href="/logout" class="btn d-grid btn-danger mb-3">Sair</a>
-                            </div>
-                            <div class="menu">
-                                <ul>
-                                    <li class="p-1 ps-3" onclick="location.href='/professor';" style="cursor:pointer;">
-                                        Início</li>
-                                    <li class="p-1 ps-3" onclick="location.href='/frequencia';" style="cursor:pointer;">
-                                        Frequência
-                                    </li>
-                                    <li class="p-1 ps-3" onclick="location.href='/professor_notas';" style="cursor:pointer;">
-                                        Notas
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="openbtn btn btn-dark position-absolute" onclick="openNav()">&#9776;</button>
+					<%- include("../../partial/_professor_painel.ejs"); %>
                         <div class="row">
                             <h1 class="title2 fw-bold text-center">Notas</h1>
                             <hr class="border border-dark border-1">

@@ -29,9 +29,7 @@ var nome = "";
 app.use(function (req, res, next) {
 	res.locals.foto = req.session.foto;
 	res.locals.usuario = req.session.usuario;
-	// if (req.session.nome != null) {
 	res.locals.nome = nome;
-	// }
 	next();
 });
 
@@ -54,6 +52,7 @@ app.post('/auth', function(request, response) {
 	// Capture the input fields
 	let usuario = request.body.usuario;
 	let senha = request.body.senha;
+
 	// Ensure the input fields exists and are not empty
 	if (usuario && senha) {
 		// Execute SQL query that'll select the account from the database based on the specified username and password
@@ -66,7 +65,24 @@ app.post('/auth', function(request, response) {
 				request.session.loggedin = true;
 				request.session.usuario = usuario;
 				request.session.tipo_usuario = results[0].tipo_usuario;
+				if (request.session.tipo_usuario === "professor") {
+					connection.query('SELECT * FROM professor WHERE rp = ? limit 1', [request.session.usuario], function (err, result) {
+						if (err) {
+							request.flash('error', err);
+						}
+						nome = result[0].nome;
+					});
+				} else if (request.session.tipo_usuario === "aluno") {
+					connection.query('SELECT * FROM aluno WHERE ra = ? limit 1', [request.session.usuario], function (err, result) {
+						if (err) {
+							request.flash('error', err);
+						}
+						nome = result[0].nome;
+					});
+				}
+				request.session.nome = nome;
 				request.session.foto = results[0].foto;
+				request.session.cod_turma = "";
 				
 				// Redirect to home page
 				response.redirect('/home');
@@ -89,30 +105,17 @@ app.get('/logout', function(request, response) {
 });
 
 app.get('/home', function(request, response) {
-	// If the user is loggedin
 	if (request.session.loggedin) {
-		// response.render(__dirname + '/views/escolha');
 		if (request.session.tipo_usuario === "admin") {
 			response.redirect('/administrador');
 			} else if (request.session.tipo_usuario === "professor") {
 			response.redirect('/professor');
 			} else if (request.session.tipo_usuario === "aluno") {
-			
-			connection.query('SELECT * FROM aluno WHERE ra = ? limit 1', [request.session.usuario], function (err, result) {
-				if (err) {
-					request.flash('error', err);
-				}
-				nome = result[0].nome;
-			});
-			
 			response.redirect('/aluno');
-			// response.end();
 		}
 		} else {
-		// Not logged in
 		response.render(path.join(__dirname + '/views/index'), {errormessage: "Faça login para acessar a página!"});
 	}
-	// response.end();
 });
 
 module.exports = app;
@@ -122,6 +125,12 @@ app.use(aluna);
 
 var professora = require("./model/professor");
 app.use(professora);
+
+var professoranotas = require("./model/professor_notas");
+app.use(professoranotas);
+
+var professorafrequencia = require("./model/professor_frequencia");
+app.use(professorafrequencia);
 
 var administradora = require("./model/admin");
 app.use(administradora);

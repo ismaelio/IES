@@ -106,7 +106,7 @@ router.post('/administrador_horario_cadastrado', function(request, response) {
 		let hora = request.body.hora;
 		let dia_semana = request.body.dia_semana;
 		
-		connection.query('SELECT * FROM horario WHERE cod_turma = ? AND cod_disciplina = ? LIMIT 1', [cod_turma, cod_disciplina], function(error, results, fields) {
+		connection.query('SELECT * FROM horario WHERE cod_turma = ? AND cod_disciplina = ? AND hora = ? AND dia_semana = ? LIMIT 1', [cod_turma, cod_disciplina, hora, dia_semana], function(error, results, fields) {
 			// If there is an issue with the query, output the error
 			if (error) throw error;
 			// If the account exists
@@ -148,7 +148,7 @@ router.post('/administrador_horario_cadastrado', function(request, response) {
 								});
 								} else {
 								
-								connection.query('SELECT * FROM horario', function (err, rowsb) {
+								connection.query('SELECT * FROM disciplina', function (err, rowsb) {
 									if (err) {
 										request.flash('error', err);
 										response.render('administrador/horario/cad_horario', {

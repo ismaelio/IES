@@ -107,12 +107,12 @@ router.get('/notas', function(request, response) {
 		connection.query('SELECT * FROM nota where ra_aluno = ? ORDER BY cod_disciplina', [ra], function (err, rows) {
 			if (err) {
 				request.flash('error', err);
-				response.render('aluno/notas.ejs', {
+				response.render('aluno/notas', {
 					// EJS variable and server-side variable
 					data: ""
 				});
 				} else {
-				response.render('aluno/notas.ejs', {
+				response.render('aluno/notas', {
 					data: rows
 				});
 			}
@@ -124,18 +124,19 @@ router.get('/notas', function(request, response) {
 });
 
 router.get('/faltas', function(request, response) {
-	
 	if ((request.session.loggedin) && (request.session.tipo_usuario === "aluno")) {
-		// Render login template
-		connection.query('SELECT * FROM notas ORDER BY disciplina', function (err, rows) {
+		
+		let ra = request.session.usuario;
+		
+		connection.query('SELECT * FROM frequencia WHERE ra_aluno = ? ORDER BY data_frequencia', [ra], function (err, rows) {
 			if (err) {
 				request.flash('error', err);
-				response.render('aluno/faltas.ejs', {
+				response.render('aluno/faltas', {
 					// EJS variable and server-side variable
 					data: ""
 				});
 				} else {
-				response.render('aluno/faltas.ejs', {
+				response.render('aluno/faltas', {
 					data: rows
 				});
 			}
@@ -150,16 +151,28 @@ router.get('/horario', function(request, response) {
 	
 	if ((request.session.loggedin) && (request.session.tipo_usuario === "aluno")) {
 		// Render login template
-		connection.query('SELECT * FROM notas ORDER BY disciplina', function (err, rows) {
+		
+		let ra = request.session.usuario;
+		let cod_turma = "";
+		
+		connection.query('SELECT * FROM aluno where ra = ? LIMIT 1', [ra], function (err, rows) {
 			if (err) {
 				request.flash('error', err);
-				response.render('aluno/horario.ejs', {
-					// EJS variable and server-side variable
-					data: ""
-				});
 				} else {
-				response.render('aluno/horario.ejs', {
-					data: rows
+				cod_turma = rows[0].cod_turma;
+				// console.log(cod_turma);
+				connection.query('SELECT * FROM horario WHERE cod_turma = ? ORDER BY CASE WHEN dia_semana LIKE "Dom%" THEN 1 WHEN dia_semana LIKE "Seg%" THEN 2 WHEN dia_semana LIKE "Ter%" THEN 3 WHEN dia_semana LIKE "Qua%" THEN 4 WHEN dia_semana LIKE "Qui%" THEN 5 WHEN dia_semana LIKE "Sex%" THEN 6 WHEN dia_semana LIKE "Sáb%" THEN 7 ELSE 8 END, hora', [cod_turma], function (err, rows) {
+					if (err) {
+						request.flash('error', err);
+						response.render('aluno/horario', {
+							// EJS variable and server-side variable
+							data: ""
+						});
+						} else {
+						response.render('aluno/horario', {
+							data: rows
+						});
+					}
 				});
 			}
 		});

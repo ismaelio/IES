@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   CONSTRAINT `FK_aluno_turma` FOREIGN KEY (`cod_turma`) REFERENCES `turma` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela pge.aluno: ~0 rows (aproximadamente)
-
 -- Copiando estrutura para tabela pge.disciplina
 CREATE TABLE IF NOT EXISTS `disciplina` (
   `codigo` varchar(10) NOT NULL,
@@ -44,21 +42,19 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   CONSTRAINT `FK_disciplina_professor` FOREIGN KEY (`rp_professor`) REFERENCES `professor` (`rp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela pge.disciplina: ~0 rows (aproximadamente)
-
 -- Copiando estrutura para tabela pge.frequencia
 CREATE TABLE IF NOT EXISTS `frequencia` (
+  `cod_frequencia` int NOT NULL AUTO_INCREMENT,
   `ra_aluno` varchar(15) NOT NULL,
   `cod_disciplina` varchar(10) NOT NULL,
   `data_frequencia` varchar(20) DEFAULT NULL,
-  `presenca` tinyint(1) DEFAULT NULL,
+  `presenca` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`cod_frequencia`),
   KEY `FK_frequencia_aluno` (`ra_aluno`),
   KEY `FK_frequencia_disciplina` (`cod_disciplina`),
   CONSTRAINT `FK_frequencia_aluno` FOREIGN KEY (`ra_aluno`) REFERENCES `aluno` (`ra`),
   CONSTRAINT `FK_frequencia_disciplina` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela pge.frequencia: ~0 rows (aproximadamente)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando estrutura para tabela pge.horario
 CREATE TABLE IF NOT EXISTS `horario` (
@@ -71,8 +67,6 @@ CREATE TABLE IF NOT EXISTS `horario` (
   CONSTRAINT `FK_horario_disciplina` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`),
   CONSTRAINT `FK_horario_turma` FOREIGN KEY (`cod_turma`) REFERENCES `turma` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela pge.horario: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela pge.login
 CREATE TABLE IF NOT EXISTS `login` (
@@ -89,19 +83,19 @@ INSERT INTO `login` (`usuario`, `senha`, `tipo_usuario`, `foto`) VALUES
 
 -- Copiando estrutura para tabela pge.nota
 CREATE TABLE IF NOT EXISTS `nota` (
+  `cod_nota` int NOT NULL AUTO_INCREMENT,
   `cod_disciplina` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `p1` double NOT NULL,
   `p2` double NOT NULL,
   `t` double NOT NULL,
   `media` double NOT NULL,
   `ra_aluno` varchar(15) NOT NULL,
-  PRIMARY KEY (`cod_disciplina`) USING BTREE,
+  PRIMARY KEY (`cod_nota`) USING BTREE,
   KEY `FK_nota_aluno` (`ra_aluno`),
+  KEY `FK_nota_disciplina` (`cod_disciplina`),
   CONSTRAINT `FK_nota_aluno` FOREIGN KEY (`ra_aluno`) REFERENCES `aluno` (`ra`),
   CONSTRAINT `FK_nota_disciplina` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela pge.nota: ~0 rows (aproximadamente)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando estrutura para tabela pge.professor
 CREATE TABLE IF NOT EXISTS `professor` (
@@ -113,8 +107,6 @@ CREATE TABLE IF NOT EXISTS `professor` (
   PRIMARY KEY (`rp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela pge.professor: ~0 rows (aproximadamente)
-
 -- Copiando estrutura para tabela pge.turma
 CREATE TABLE IF NOT EXISTS `turma` (
   `codigo` varchar(10) NOT NULL,
@@ -122,8 +114,6 @@ CREATE TABLE IF NOT EXISTS `turma` (
   `sala` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela pge.turma: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

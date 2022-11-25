@@ -112,26 +112,47 @@ router.post('/administrador_aluno_cadastrado', function(request, response) {
 			if (error) throw error;
 			// If the account exists
 			if (results.length > 0) {
-				response.render('administrador/aluno/cad_aluno', {
-					// EJS variable and server-side variable
-					data: "", message: "Aluno não cadastrado! O RA já está cadastrado!"
-				});
-				} else {
-				connection.query('INSERT INTO aluno (ra, nome, cpf, email, nasc, cod_turma) values (?,?,?,?,?,?)', [ra, nome, cpf, email, nasc, cod_turma], function(error, results, fields) {
-					// If there is an issue with the query, output the error
-					if (error) throw error;
-					// response.render('administrador/adm_aluno/reg_aluno', {message: "Aluno cadastrado com sucesso!"});
-				});
 				
-				connection.query('INSERT INTO login (usuario, senha, tipo_usuario) values (?,?,"aluno")', [ra, nasc], function(error, results, fields) {
-					// If there is an issue with the query, output the error
-					if (error) throw error;
-					// response.render('administrador/adm_aluno/reg_aluno', {message: "Aluno cadastrado com sucesso!"});
-					response.render('administrador/aluno/cad_aluno', {
-						// EJS variable and server-side variable
-						data: "", message: "Aluno cadastrado com sucesso!"
+				connection.query('SELECT * FROM turma', function (err, rows) {
+					if (err) {
+						request.flash('error', err);
+						response.render('administrador/aluno/cad_aluno', {
+							// EJS variable and server-side variable
+							data: "", message: "Aluno não cadastrado! O RA já está cadastrado!"
+						});
+						} else {
+						response.render('administrador/aluno/cad_aluno', {
+							// EJS variable and server-side variable
+							data: rows, message: "Aluno não cadastrado! O RA já está cadastrado!"
+						});
+					}});
+					
+					} else {
+					connection.query('INSERT INTO aluno (ra, nome, cpf, email, nasc, cod_turma) values (?,?,?,?,?,?)', [ra, nome, cpf, email, nasc, cod_turma], function(error, results, fields) {
+						// If there is an issue with the query, output the error
+						if (error) throw error;
+						// response.render('administrador/adm_aluno/reg_aluno', {message: "Aluno cadastrado com sucesso!"});
 					});
-				});
+					
+					connection.query('INSERT INTO login (usuario, senha, tipo_usuario) values (?,?,"aluno")', [ra, nasc], function(error, results, fields) {
+						// If there is an issue with the query, output the error
+						if (error) throw error;
+						// response.render('administrador/adm_aluno/reg_aluno', {message: "Aluno cadastrado com sucesso!"});
+						
+						connection.query('SELECT * FROM turma', function (err, rows) {
+							if (err) {
+								request.flash('error', err);
+								response.render('administrador/aluno/cad_aluno', {
+									// EJS variable and server-side variable
+									data: "", message: ""
+								});
+								} else {
+								response.render('administrador/aluno/cad_aluno', {
+									// EJS variable and server-side variable
+									data: rows, message: "Aluno cadastrado com sucesso!"
+								});
+							}});
+					});
 			}			
 		});
 		// response.end();
