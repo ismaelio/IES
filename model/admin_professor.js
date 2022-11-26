@@ -39,8 +39,18 @@ router.get('/administrador_professor_excluir', function(request, response) {
 		connection.query('DELETE FROM professor WHERE rp = ?', [rp], function (err, rows) {
 			if (err) {
 				request.flash('error', err);
-				response.render('administrador/professor/professor', {
-					data: "", message: ""
+				connection.query('SELECT * FROM professor ORDER BY nome', function (err, rows) {
+					if (err) {
+						request.flash('error', err);
+						response.render('administrador/professor/professor', {
+							// EJS variable and server-side variable
+							data: "", message: ""
+						});
+						} else {
+						response.render('administrador/professor/professor', {
+							data: rows, message: "O professor não pode ser excluído! Ele é muito importante!"
+						});
+					}
 				});
 				} else {
 				

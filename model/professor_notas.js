@@ -98,7 +98,7 @@ router.get('/professor_notas_cadastro', function(request, response) {
 				});
 				} else {
 				
-				connection.query('SELECT * FROM disciplina', function (err, rowsb) {
+				connection.query('SELECT * FROM disciplina WHERE rp_professor = ?', [request.session.usuario], function (err, rowsb) {
 					if (err) {
 						request.flash('error', err);
 						response.render('professor/notas/cad_notas', {
@@ -142,7 +142,7 @@ router.post('/professor_notas_cadastrado', function(request, response) {
 						});
 						} else {
 						
-						connection.query('SELECT * FROM disciplina', function (err, rowsb) {
+						connection.query('SELECT * FROM disciplina WHERE rp_professor = ?', [request.session.usuario], function (err, rowsb) {
 							if (err) {
 								request.flash('error', err);
 								response.render('professor/notas/cad_notas', {
@@ -161,7 +161,7 @@ router.post('/professor_notas_cadastrado', function(request, response) {
 						if (error) throw error;
 						
 						
-						connection.query('SELECT * FROM turma', function (err, rows) {
+						connection.query('SELECT * FROM aluno', function (err, rows) {
 							if (err) {
 								request.flash('error', err);
 								response.render('professor/notas/cad_notas', {
@@ -169,7 +169,7 @@ router.post('/professor_notas_cadastrado', function(request, response) {
 								});
 								} else {
 								
-								connection.query('SELECT * FROM horario', function (err, rowsb) {
+								connection.query('SELECT * FROM disciplina WHERE rp_professor = ?', [request.session.usuario], function (err, rowsb) {
 									if (err) {
 										request.flash('error', err);
 										response.render('professor/notas/cad_notas', {
@@ -212,7 +212,7 @@ router.get('/professor_notas_editar', function(request, response) {
 						});
 						} else {
 						
-						connection.query('SELECT * FROM disciplina', function (err, rowsb) {
+						connection.query('SELECT * FROM disciplina WHERE rp_professor = ?', [request.session.usuario], function (err, rowsb) {
 							if (err) {
 								request.flash('error', err);
 								response.render('professor/notas/editar_notas', {
@@ -258,7 +258,7 @@ router.post('/professor_notas_editado', function(request, response) {
 				});
 				} else {
 				
-				connection.query('SELECT * FROM disciplina', function (err, rowsb) {
+				connection.query('SELECT * FROM disciplina WHERE rp_professor = ?', [request.session.usuario], function (err, rowsb) {
 					if (err) {
 						request.flash('error', err);
 						response.render('professor/notas/notas', {

@@ -42,7 +42,7 @@ router.get('/administrador_disciplina_excluir', function(request, response) {
 				connection.query('SELECT * FROM disciplina ORDER BY codigo', function (err, rows) {
 					response.render('administrador/disciplina/disciplina', {
 						// EJS variable and server-side variable
-						data: rows, message: "Não foi possível excluir a disciplina! A disciplina é usada por alguma nota!"
+						data: rows, message: "Não foi possível excluir a disciplina! A disciplina é muito importante!"
 					});
 				});
 				} else {
@@ -52,7 +52,7 @@ router.get('/administrador_disciplina_excluir', function(request, response) {
 						request.flash('error', err);
 						response.render('administrador/disciplina/disciplina', {
 							// EJS variable and server-side variable
-							data: rows, message: "Não foi possível excluir a disciplina! A disciplina é usada por alguma nota!"
+							data: rows, message: "Não foi possível excluir a disciplina! A disciplina é muito importante!"
 						});
 						} else {
 						response.render('administrador/disciplina/disciplina', {
