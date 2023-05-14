@@ -38,9 +38,18 @@ router.get('/administrador_turma_excluir', function(request, response) {
 		var codigo = request.query.codigo;
 		connection.query('DELETE FROM turma WHERE codigo = ?', [codigo], function (err, rows) {
 			if (err) {
-				request.flash('error', err);
-				response.render('administrador/turma/turma', {
-					data: "", message: ""
+				connection.query('SELECT * FROM turma ORDER BY nome', function (err, rows) {
+					if (err) {
+						request.flash('error', err);
+						response.render('administrador/turma/turma', {
+							// EJS variable and server-side variable
+							data: "", message: "A turma não pode ser excluída! Ela é muito importante!"
+						});
+						} else {
+						response.render('administrador/turma/turma', {
+							data: rows, message: "A turma não pode ser excluída! Ela é muito importante!"
+						});
+					}
 				});
 				} else {
 				

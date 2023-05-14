@@ -71,6 +71,8 @@ app.post('/auth', function(request, response) {
 							request.flash('error', err);
 						}
 						nome = result[0].nome;
+						request.session.nome = nome;
+						// console.log(nome);
 					});
 				} else if (request.session.tipo_usuario === "aluno") {
 					connection.query('SELECT * FROM aluno WHERE ra = ? limit 1', [request.session.usuario], function (err, result) {
@@ -78,9 +80,9 @@ app.post('/auth', function(request, response) {
 							request.flash('error', err);
 						}
 						nome = result[0].nome;
+						request.session.nome = nome;
 					});
 				}
-				request.session.nome = nome;
 				request.session.foto = results[0].foto;
 				request.session.cod_turma = "";
 				
@@ -101,6 +103,7 @@ app.post('/auth', function(request, response) {
 app.get('/logout', function(request, response) {
 	request.session.loggedin = false;
 	request.session.usuario = null;
+	request.session.nome = null;
 	response.render(path.join(__dirname + '/views/index'), {errormessage: "Logout efetuado com sucesso!"});
 });
 

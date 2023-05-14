@@ -2,7 +2,7 @@
 -- Servidor:                     127.0.0.1
 -- Versão do servidor:           8.0.28 - MySQL Community Server - GPL
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              12.2.0.6576
+-- HeidiSQL Versão:              12.5.0.6677
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -16,10 +16,12 @@
 
 
 -- Copiando estrutura do banco de dados para pge
+DROP DATABASE IF EXISTS `pge`;
 CREATE DATABASE IF NOT EXISTS `pge` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `pge`;
 
 -- Copiando estrutura para tabela pge.aluno
+DROP TABLE IF EXISTS `aluno`;
 CREATE TABLE IF NOT EXISTS `aluno` (
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -32,7 +34,12 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   CONSTRAINT `FK_aluno_turma` FOREIGN KEY (`cod_turma`) REFERENCES `turma` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Copiando dados para a tabela pge.aluno: ~1 rows (aproximadamente)
+INSERT INTO `aluno` (`email`, `nome`, `ra`, `cpf`, `nasc`, `cod_turma`) VALUES
+	('ana2023@pge.com.br', 'Ana Paula', '23999', '94381155017', '2003-09-02', '001');
+
 -- Copiando estrutura para tabela pge.disciplina
+DROP TABLE IF EXISTS `disciplina`;
 CREATE TABLE IF NOT EXISTS `disciplina` (
   `codigo` varchar(10) NOT NULL,
   `nome` varchar(255) NOT NULL,
@@ -42,7 +49,12 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   CONSTRAINT `FK_disciplina_professor` FOREIGN KEY (`rp_professor`) REFERENCES `professor` (`rp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Copiando dados para a tabela pge.disciplina: ~1 rows (aproximadamente)
+INSERT INTO `disciplina` (`codigo`, `nome`, `rp_professor`) VALUES
+	('001', 'Matemática Discreta', '23001');
+
 -- Copiando estrutura para tabela pge.frequencia
+DROP TABLE IF EXISTS `frequencia`;
 CREATE TABLE IF NOT EXISTS `frequencia` (
   `cod_frequencia` int NOT NULL AUTO_INCREMENT,
   `ra_aluno` varchar(15) NOT NULL,
@@ -54,9 +66,14 @@ CREATE TABLE IF NOT EXISTS `frequencia` (
   KEY `FK_frequencia_disciplina` (`cod_disciplina`),
   CONSTRAINT `FK_frequencia_aluno` FOREIGN KEY (`ra_aluno`) REFERENCES `aluno` (`ra`),
   CONSTRAINT `FK_frequencia_disciplina` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela pge.frequencia: ~1 rows (aproximadamente)
+INSERT INTO `frequencia` (`cod_frequencia`, `ra_aluno`, `cod_disciplina`, `data_frequencia`, `presenca`) VALUES
+	(12, '23999', '001', '2023-05-08', 1);
 
 -- Copiando estrutura para tabela pge.horario
+DROP TABLE IF EXISTS `horario`;
 CREATE TABLE IF NOT EXISTS `horario` (
   `cod_turma` varchar(10) NOT NULL,
   `cod_disciplina` varchar(10) NOT NULL,
@@ -68,7 +85,12 @@ CREATE TABLE IF NOT EXISTS `horario` (
   CONSTRAINT `FK_horario_turma` FOREIGN KEY (`cod_turma`) REFERENCES `turma` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Copiando dados para a tabela pge.horario: ~1 rows (aproximadamente)
+INSERT INTO `horario` (`cod_turma`, `cod_disciplina`, `hora`, `dia_semana`) VALUES
+	('001', '001', '07:00', 'Segunda-Feira');
+
 -- Copiando estrutura para tabela pge.login
+DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `usuario` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `senha` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -77,11 +99,14 @@ CREATE TABLE IF NOT EXISTS `login` (
   PRIMARY KEY (`usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- Copiando dados para a tabela pge.login: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela pge.login: ~3 rows (aproximadamente)
 INSERT INTO `login` (`usuario`, `senha`, `tipo_usuario`, `foto`) VALUES
+	('23001', '1234', 'professor', '../../../images/user.png'),
+	('23999', '1234', 'aluno', '../../../images/user.png'),
 	('admin', 'admin', 'admin', '../../../images/admin.png');
 
 -- Copiando estrutura para tabela pge.nota
+DROP TABLE IF EXISTS `nota`;
 CREATE TABLE IF NOT EXISTS `nota` (
   `cod_nota` int NOT NULL AUTO_INCREMENT,
   `cod_disciplina` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -95,9 +120,14 @@ CREATE TABLE IF NOT EXISTS `nota` (
   KEY `FK_nota_disciplina` (`cod_disciplina`),
   CONSTRAINT `FK_nota_aluno` FOREIGN KEY (`ra_aluno`) REFERENCES `aluno` (`ra`),
   CONSTRAINT `FK_nota_disciplina` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela pge.nota: ~1 rows (aproximadamente)
+INSERT INTO `nota` (`cod_nota`, `cod_disciplina`, `p1`, `p2`, `t`, `media`, `ra_aluno`) VALUES
+	(7, '001', 10, 10, 10, 10, '23999');
 
 -- Copiando estrutura para tabela pge.professor
+DROP TABLE IF EXISTS `professor`;
 CREATE TABLE IF NOT EXISTS `professor` (
   `rp` varchar(15) NOT NULL,
   `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -107,13 +137,22 @@ CREATE TABLE IF NOT EXISTS `professor` (
   PRIMARY KEY (`rp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Copiando dados para a tabela pge.professor: ~1 rows (aproximadamente)
+INSERT INTO `professor` (`rp`, `nome`, `cpf`, `email`, `nasc`) VALUES
+	('23001', 'Alberto Santos', '46949219083', 'alberto@pge.com.br', '1979-05-04');
+
 -- Copiando estrutura para tabela pge.turma
+DROP TABLE IF EXISTS `turma`;
 CREATE TABLE IF NOT EXISTS `turma` (
   `codigo` varchar(10) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `sala` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela pge.turma: ~1 rows (aproximadamente)
+INSERT INTO `turma` (`codigo`, `nome`, `sala`) VALUES
+	('001', 'Turma A', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

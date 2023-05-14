@@ -43,7 +43,7 @@
 											<thead class="text-center">
 												<tr>
 													<th scope="col">RA do Aluno</th>
-													<th scope="col">Código da Disciplina</th>
+													<th scope="col">Disciplina</th>
 													<th scope="col">P1</th>
 													<th scope="col">P2</th>
 													<th scope="col">T</th>
@@ -55,7 +55,7 @@
 												<% if(data.length){ for(var i = 0; i< data.length; i++) {%>
 												<tr>
 													<td><%= data[i].ra_aluno%></td>
-                                                    <td><%= data[i].cod_disciplina%></td>
+                                                    <td><%= data[i].cod_disciplina%>  - <%= datab[0].nome%></td>
                                                     <td><%= data[i].p1%></td>
 													<td><%= data[i].p2%></td>
 													<td><%= data[i].t%></td>
@@ -82,7 +82,7 @@
 						</div>
 					</div>
 				</div>
-				<footer class="position-absolute start-50 translate-middle-x">© 2022 PGE</footer>
+				<footer class="position-absolute start-50 translate-middle-x">© 2023 PGE</footer>
 			</main>
 		</div>
 	</body>

@@ -28,8 +28,9 @@
 								<div class="col border border-3 border-dark">
 									<img alt="Editar dados" onclick="location.href='/professor_editar';" style="cursor: pointer;" class="img-fluid mx-auto d-block m-3" src="<%=foto%>" width="128px" height="128px" />
 									<h6 class="fw-bold">
-										<%=usuario%><br/>
-										Professor<br/>
+										<!-- <%=usuario%><br/> -->
+										<!-- Professor<br/> -->
+										<%=nome%><br/>
 										RP: <%=usuario%>
 									</h6>
 									<a href="/logout" class="btn d-grid btn-danger mb-3">Sair</a>
@@ -58,11 +59,13 @@
 							<h1 style="font-size:42px; color:blue;" id='status' class='title2'><%= message %></h1>
 							<!-- <p>Suas aulas começam 01/08</p> -->
 							<!-- <p></p> -->
+							<% } else { %>
+							<h1 style="font-size:72px" class="title fw-bold">Bem-vindo!</h1>
 							<% } %>
 						</div>
 					</div>
 				</div>
-				<footer class="position-absolute start-50 translate-middle-x">© 2022 PGE</footer>
+				<footer class="position-absolute start-50 translate-middle-x">© 2023 PGE</footer>
 			</main>
 		</div>
 	</body>

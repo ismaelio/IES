@@ -40,9 +40,19 @@ router.get('/professor_notas_acessar', function(request, response) {
 					data: "", message: "", disciplina: codigo
 				});
 				} else {
+				
+				connection.query('SELECT * FROM disciplina WHERE codigo = ? ORDER BY codigo', [codigo], function (err, rowsb) {
+			if (err) {
+				request.flash('error', err);
 				response.render('professor/notas/notas_acessar', {
-					data: rows, message: "", disciplina: codigo
+					data: "", message: "", disciplina: codigo
 				});
+				} else {
+				response.render('professor/notas/notas_acessar', {
+					data: rows, message: "", disciplina: codigo, datab: rowsb 
+				});
+			}
+		});
 			}
 		});
 		} else {

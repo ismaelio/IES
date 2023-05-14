@@ -146,6 +146,11 @@ h1.title {
     min-height: 400px;
 }
 
+.form-control:read-only {
+	background-color: #e9ecef;
+    opacity: 1;
+}
+
 footer {
     font-family: "Bree Serif";
 }

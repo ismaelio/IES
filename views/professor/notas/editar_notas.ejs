@@ -50,10 +50,10 @@
 													</div>
 													<div class="col-12 col-sm-6">
 														<div class="mb-3">
-															<label class="form-label">Código da Disciplina</label>
+															<label class="form-label">Disciplina</label>
 															<select class="form-select" id="cod_disciplina" name="cod_disciplina" disabled>
 																<% if(datab.length){ for(var i = 0; i< datab.length; i++) {%>
-																<option <% if(datab[i].codigo === datac[0].cod_disciplina) {%>selected<%}%>><%= datab[i].codigo%>
+																<option <% if(datab[i].codigo === datac[0].cod_disciplina) {%>selected<%}%>><%= datab[i].codigo%> - <%= datab[0].nome%>
 																</option>
 																<% } }else{ %>
 																<!-- <div class="col-12 col-sm-6 col-lg-3 py-4 px-5">
@@ -115,7 +115,7 @@
 						</div>
 					</div>
 				</div>
-				<footer class="position-absolute start-50 translate-middle-x">© 2022 PGE</footer>
+				<footer class="position-absolute start-50 translate-middle-x">© 2023 PGE</footer>
 			</main>
 		</div>
 	</body>

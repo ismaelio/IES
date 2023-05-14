@@ -38,10 +38,19 @@ router.get('/administrador_aluno_excluir', function(request, response) {
 		var ra = request.query.ra;
 		connection.query('DELETE FROM aluno WHERE ra = ?', [ra], function (err, rows) {
 			if (err) {
-				request.flash('error', err);
-				response.render('administrador/aluno/aluno', {
-					// EJS variable and server-side variable
-					data: "", message: ""
+			request.flash('error', err);
+					connection.query('SELECT * FROM aluno ORDER BY nome', function (err, rows) {
+					if (err) {
+						request.flash('error', err);
+						response.render('administrador/aluno/aluno', {
+							// EJS variable and server-side variable
+							data: "", message: "O aluno não pode ser excluído! Ele é muito importante!"
+						});
+						} else {
+						response.render('administrador/aluno/aluno', {
+							data: rows, message: "O aluno não pode ser excluído! Ele é muito importante!"
+						});
+					}
 				});
 				} else {
 				
@@ -56,7 +65,7 @@ router.get('/administrador_aluno_excluir', function(request, response) {
 						request.flash('error', err);
 						response.render('administrador/aluno/aluno', {
 							// EJS variable and server-side variable
-							data: "", message: ""
+							data: "", message: "O aluno não pode ser excluído! Ele é muito importante!"
 						});
 						} else {
 						response.render('administrador/aluno/aluno', {
