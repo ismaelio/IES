@@ -58,7 +58,7 @@
 															<label class="form-label">Disciplina</label>
 															<select class="form-select" id="cod_disciplina" name="cod_disciplina" required>
 																<% if(datab.length){ for(var i = 0; i< datab.length; i++) {%>
-																<option><%= datab[i].codigo%> - <%= datab[0].nome%>
+																<option value="<%= datab[i].codigo%>"><%= datab[i].codigo%> - <%= datab[0].nome%>
 																</option>
 																<% } }else{ %>
 																<!-- <div class="col-12 col-sm-6 col-lg-3 py-4 px-5">

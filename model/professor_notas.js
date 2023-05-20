@@ -42,22 +42,32 @@ router.get('/professor_notas_acessar', function(request, response) {
 				} else {
 				
 				connection.query('SELECT * FROM disciplina WHERE codigo = ? ORDER BY codigo', [codigo], function (err, rowsb) {
-			if (err) {
-				request.flash('error', err);
-				response.render('professor/notas/notas_acessar', {
-					data: "", message: "", disciplina: codigo
-				});
-				} else {
-				response.render('professor/notas/notas_acessar', {
-					data: rows, message: "", disciplina: codigo, datab: rowsb 
-				});
-			}
-		});
-			}
-		});
-		} else {
-		response.render('index', {errormessage: "Faça login para acessar a página!"});
-	}
+					if (err) {
+						request.flash('error', err);
+						response.render('professor/notas/notas_acessar', {
+							data: "", message: "", disciplina: codigo
+						});
+						} else {
+						
+						
+						connection.query('SELECT * FROM aluno', function (err, rowsc) {
+							if (err) {
+								request.flash('error', err);
+								response.render('professor/notas/notas_acessar', {
+									data: "", message: "", disciplina: codigo
+								});
+								} else {
+								response.render('professor/notas/notas_acessar', {
+									data: rows, message: "", disciplina: codigo, datab: rowsb, datac: rowsc
+								});
+							}
+						});
+					}});
+					
+			}});
+	} else {
+	response.render('index', {errormessage: "Faça login para acessar a página!"});
+}
 });
 
 router.get('/professor_notas_excluir', function(request, response) {
@@ -277,7 +287,7 @@ router.post('/professor_notas_editado', function(request, response) {
 						});
 						} else {
 						response.render('professor/notas/notas', {
-							data: rows, message: "Nota editada com sucesso!", datab: rowsb
+							data: rowsb, message: "Nota editada com sucesso!", datab: rows
 						});
 					}});
 			}});

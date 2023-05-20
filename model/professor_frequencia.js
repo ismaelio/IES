@@ -284,7 +284,7 @@ router.post('/professor_frequencia_editado', function(request, response) {
 						});
 						} else {
 						response.render('professor/frequencia/frequencia', {
-							data: rows, message: "Frequência editada com sucesso!", datab: rowsb
+							data: rowsb, message: "Frequência editada com sucesso!", datab: rows
 						});
 					}});
 			}});
