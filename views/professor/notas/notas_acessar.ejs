@@ -55,7 +55,7 @@
 												<% if(data.length){ for(var i = 0; i< data.length; i++) {%>
 												<tr>
 													<td><%= data[i].ra_aluno%>
-														<% if(datac.length){ for(var j = 0; j< data.length; j++) { if(datac[j].ra == data[i].ra_aluno) {%>- <%=datac[j].nome %><%}%></td>
+														<% if(datac.length){ for(var j = 0; j< data.length; j++) { if(datac[j].ra == data[i].ra_aluno) {%>- <%=datac[j].nome %></td>
                                                     <td><%= data[i].cod_disciplina%>  - <%= datab[0].nome%></td>
                                                     <td><%= data[i].p1%></td>
 													<td><%= data[i].p2%></td>
@@ -65,7 +65,7 @@
 													<a href='/professor_notas_excluir?cod_nota=<%= data[i].cod_nota%>&cod_disciplina=<%= data[i].cod_disciplina%>' class='btn btn-danger'>Excluir</a>
 													</td>
 												</tr>
-												<% }}} }else{ %>
+												<% }}}} }else{ %>
 												<div class="col-12 col-sm-6 col-lg-3 py-4 px-5">
 													<h5 class="text-center fw-bold">Nenhum dado encontrado.</h5>
 												</div>
