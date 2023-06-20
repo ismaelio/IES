@@ -32,7 +32,7 @@
 								<hr class="border border-dark border-1">
 								
 								<% if(data.length){ for(var i = 0; i< data.length; i++) { if(datab.length){
-									for(var j = 0; j< data.length; j++) {
+									for(var j = 0; j< datab.length; j++) {
 								if ((datab[j].codigo) === (data[i].cod_disciplina)) {%>
 								<div class="col-12 col-sm-6 col-lg-3 py-4 px-5">
 									<h5 class="text-center fw-bold">Disciplina: <%= data[i].cod_disciplina%> - <%= datab[j].nome %></h5>
