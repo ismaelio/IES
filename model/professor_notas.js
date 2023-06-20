@@ -37,7 +37,7 @@ router.get('/professor_notas_acessar', function(request, response) {
 			if (err) {
 				request.flash('error', err);
 				response.render('professor/notas/notas_acessar', {
-					data: "", message: "", disciplina: codigo
+					data: null, message: "", disciplina: codigo
 				});
 				} else {
 				
@@ -45,7 +45,7 @@ router.get('/professor_notas_acessar', function(request, response) {
 					if (err) {
 						request.flash('error', err);
 						response.render('professor/notas/notas_acessar', {
-							data: "", message: "", disciplina: codigo
+							data: null, message: "", disciplina: codigo
 						});
 						} else {
 						
@@ -54,7 +54,7 @@ router.get('/professor_notas_acessar', function(request, response) {
 							if (err) {
 								request.flash('error', err);
 								response.render('professor/notas/notas_acessar', {
-									data: "", message: "", disciplina: codigo
+									data: null, message: "", disciplina: codigo
 								});
 								} else {
 								response.render('professor/notas/notas_acessar', {
@@ -221,7 +221,7 @@ router.get('/professor_notas_cadastro', function(request, response) {
 											} else {
 											response.render('professor/notas/cad_notas', {
 												data: rows, message: "Nota cadastrada com sucesso!", datab: rowsb
-											});
+												});
 										}});
 								}})
 								

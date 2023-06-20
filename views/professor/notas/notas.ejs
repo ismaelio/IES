@@ -33,9 +33,9 @@
 								<hr class="border border-dark border-1">
 								<div class="row">
 									<!-- <div class="row my-3"> -->
-										<!-- <div class="col"> -->
-											<!-- <a href="/administrador_horario_cadastro" class="btn btn-success">Novo</a> -->
-										<!-- </div> -->
+									<!-- <div class="col"> -->
+									<!-- <a href="/administrador_horario_cadastro" class="btn btn-success">Novo</a> -->
+									<!-- </div> -->
 									<!-- </div> -->
 									<div class="table-responsive">
 										<% if(data.length){%>
@@ -53,7 +53,6 @@
                                                     <td><%= data[i].codigo%></td>
                                                     <td><%= data[i].nome%></td>
                                                     <td><a href='/professor_notas_acessar?codigo=<%= data[i].codigo%>' class='btn btn-primary'>Acessar</a>
-													<!-- <a href='/administrador_horario_excluir?cod_turma=<%= data[i].cod_turma%>&cod_disciplina=<%= data[i].cod_disciplina%>' class='btn btn-danger'>Excluir</a> -->
 													</td>
 												</tr>
 												<% } }else{ %>

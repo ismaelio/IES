@@ -215,39 +215,30 @@ router.get('/administrador_horario_editar', function(request, response) {
 	}
 });
 
-router.post('/administrador_disciplina_editado', function(request, response) {
+router.post('/administrador_horario_editado', function(request, response) {
 	if ((request.session.loggedin) && (request.session.tipo_usuario === "admin")) {
-		var cod_turma = request.query.cod_turma;
-		var cod_disciplina = request.query.cod_disciplina;
-		var hora = request.query.hora;
-		var dia_semana = request.query.dia_semana;
+	
+		let cod_turma = request.body.cod_turma;
+		let cod_disciplina = request.body.cod_disciplina;
+		let hora = request.body.hora;
+		let dia_semana = request.body.dia_semana;
 		
 		connection.query('UPDATE horario SET hora = ?, dia_semana = ? WHERE cod_turma = ? AND cod_disciplina = ?', [hora, dia_semana, cod_turma, cod_disciplina], function(error, results, fields) {
 			if (error) throw error;
 		});
 		
-		connection.query('SELECT * FROM turma', function (err, rows) {
+		connection.query('SELECT * FROM horario ORDER BY cod_turma, dia_semana, hora', function (err, rows) {
 			if (err) {
 				request.flash('error', err);
-				response.render('administrador/horario/editar_horario', {
-					// EJS variable and server-side variable
-					data: "", message: "", datab: ""
+				response.render('administrador/horario/horario', {
+					data: "", message: ""
 				});
 				} else {
-				
-				connection.query('SELECT * FROM disciplina', function (err, rowsb) {
-					if (err) {
-						request.flash('error', err);
-						response.render('administrador/horario/editar_horario', {
-							// EJS variable and server-side variable
-							data: "", message: "", datab: ""
-						});
-						} else {
-						response.render('administrador/horario/editar_horario', {
-							data: rows, message: "Horário editado com sucesso!", datab: rowsb
-						});
-					}});
-			}});
+				response.render('administrador/horario/horario', {
+					data: rows, message: "Horário editado com sucesso!"
+				});
+			}
+		});
 			} else {
 			response.render('index', {errormessage: "Faça login para acessar a página!"});
 	}
