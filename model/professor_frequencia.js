@@ -33,7 +33,7 @@ router.get('/professor_frequencia', function(request, response) {
 router.get('/professor_frequencia_acessar', function(request, response) {
 	if ((request.session.loggedin) && (request.session.tipo_usuario === "professor")) {
 		var codigo = request.query.codigo;
-		connection.query('SELECT * FROM frequencia WHERE cod_disciplina = ? ORDER BY cod_disciplina', [codigo], function (err, rows) {
+		connection.query('SELECT * FROM frequencia WHERE cod_disciplina = ? ORDER BY cod_disciplina, data_frequencia', [codigo], function (err, rows) {
 			if (err) {
 				request.flash('error', err);
 				response.render('professor/frequencia/frequencia_acessar', {
@@ -42,17 +42,17 @@ router.get('/professor_frequencia_acessar', function(request, response) {
 				} else {
 				
 				connection.query('SELECT * FROM disciplina WHERE codigo = ? ORDER BY codigo', [codigo], function (err, rowsb) {
-			if (err) {
-				request.flash('error', err);
-				response.render('professor/frequencia/frequencia_acessar', {
-					data: "", message: "", disciplina: codigo
+					if (err) {
+						request.flash('error', err);
+						response.render('professor/frequencia/frequencia_acessar', {
+							data: "", message: "", disciplina: codigo
+						});
+						} else {
+						response.render('professor/frequencia/frequencia_acessar', {
+							data: rows, message: "", disciplina: codigo, datab: rowsb 
+						});
+					}
 				});
-				} else {
-				response.render('professor/frequencia/frequencia_acessar', {
-					data: rows, message: "", disciplina: codigo, datab: rowsb 
-				});
-			}
-		});
 			}
 		});
 		} else {
@@ -67,7 +67,7 @@ router.get('/professor_frequencia_excluir', function(request, response) {
 		connection.query('DELETE FROM frequencia WHERE cod_frequencia = ?', [cod_frequencia], function (err, rows) {
 			if (err) {
 				request.flash('error', err);
-				connection.query('SELECT * FROM frequencia WHERE cod_disciplina = ? ORDER BY cod_disciplina', [cod_disciplina], function (err, rows) {
+				connection.query('SELECT * FROM frequencia WHERE cod_disciplina = ? ORDER BY cod_disciplina, data_frequencia', [cod_disciplina], function (err, rows) {
 					response.render('professor/frequencia/frequencia_acessar', {
 						// EJS variable and server-side variable
 						data: rows, message: "Não foi possível excluir a frequência!", disciplina: cod_disciplina
@@ -75,19 +75,27 @@ router.get('/professor_frequencia_excluir', function(request, response) {
 				});
 				} else {
 				
-				connection.query('SELECT * FROM frequencia WHERE cod_disciplina = ? ORDER BY cod_disciplina', [cod_disciplina], function (err, rows) {
+				connection.query('SELECT * FROM disciplina WHERE codigo = ? ORDER BY codigo', [cod_disciplina], function (err, rowsb) {
 					if (err) {
 						request.flash('error', err);
 						response.render('professor/frequencia/frequencia_acessar', {
-							// EJS variable and server-side variable
-							data: rows, message: "Não foi possível excluir a frequência!", disciplina: cod_disciplina
+							data: "", message: "", disciplina: cod_disciplina
 						});
 						} else {
-						response.render('professor/frequencia/frequencia_acessar', {
-							data: rows, message: "Frequência excluída com sucesso!", disciplina: cod_disciplina
+						connection.query('SELECT * FROM frequencia WHERE cod_disciplina = ? ORDER BY cod_disciplina', [cod_disciplina], function (err, rows) {
+							if (err) {
+								request.flash('error', err);
+								response.render('professor/frequencia/frequencia_acessar', {
+									// EJS variable and server-side variable
+									data: rows, message: "Não foi possível excluir a frequência!", disciplina: cod_disciplina
+								});
+								} else {
+								response.render('professor/frequencia/frequencia_acessar', {
+									data: rows, message: "Frequência excluída com sucesso!", disciplina: cod_disciplina, datab: rowsb
+								});
+							}
 						});
-					}
-				});
+					}});
 			}
 		});
 		} else {
@@ -120,11 +128,11 @@ router.get('/professor_frequencia_cadastro', function(request, response) {
 							data: rows, message: "", datab: rowsb
 						});
 					}});
-			}})
-			} else {
-			// Not logged in
-			response.render('index', {errormessage: "Faça login para acessar a página!"});
-	}
+		}})
+		} else {
+		// Not logged in
+		response.render('index', {errormessage: "Faça login para acessar a página!"});
+}
 });
 
 router.post('/professor_frequencia_cadastrado', function(request, response) {
@@ -135,9 +143,9 @@ router.post('/professor_frequencia_cadastrado', function(request, response) {
 		let data_frequencia = request.body.data_frequencia;
 		let presenca;
 		if (request.body.presenca) {
-		presenca = 1;
-		} else {
-		presenca = 0;
+			presenca = 1;
+			} else {
+			presenca = 0;
 		}
 		
 		connection.query('SELECT * FROM frequencia WHERE ra_aluno = ? AND cod_disciplina = ? and data_frequencia = ? LIMIT 1', [ra_aluno, cod_disciplina, data_frequencia], function(error, results, fields) {
@@ -257,9 +265,9 @@ router.post('/professor_frequencia_editado', function(request, response) {
 		
 		let presenca;
 		if (request.body.presenca) {
-		presenca = 1;
-		} else {
-		presenca = 0;
+			presenca = 1;
+			} else {
+			presenca = 0;
 		}
 		
 		connection.query('UPDATE frequencia SET data_frequencia = ?, presenca = ? WHERE cod_frequencia = ?', [data_frequencia, presenca, cod_frequencia], function(error, results, fields) {
@@ -291,6 +299,6 @@ router.post('/professor_frequencia_editado', function(request, response) {
 			} else {
 			response.render('index', {errormessage: "Faça login para acessar a página!"});
 	}
-});
-
-module.exports = router;											
+	});
+	
+	module.exports = router;												
